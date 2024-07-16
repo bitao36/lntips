@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">    
+    <title>Lightning Tips</title>
+       
+
+</head>
+<body>
+    <h1>Send a Tip via Lightning Network</h1>
+    <form id="tip-form">
+        <label for="amount">Amount (sats):</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Generate Invoice</button>
+    </form>
+    <div id="invoice" style="display: none;">
+        <h2>Invoice</h2>
+        <p id="payment-request"></p>
+    </div>
+    <div id="success-message" style="display: none;">
+        <img src="{{ url_for('static', filename='success.png') }}" width="200" height="200" alt="Payment Successful">
+        <p>Payment Successful!</p>
+    </div>
+    <script>
+        document.getElementById('tip-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const amount = document.getElementById('amount').value;
+            const response = await fetch('/invoice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                document.getElementById('invoice').style.display = 'block';
+                document.getElementById('payment-request').textContent = data.payment_request;
+                
+            } else {
+                alert('Error: ' + data.error);
+            }
+        });
+        
+
+    </script>
+</body>
+</html>

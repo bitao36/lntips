@@ -1,0 +1,66 @@
+/* Asegúrate de que los archivos CSS e imágenes estén en la carpeta 'static' */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Cambiado a flex-start para alinear el contenido arriba */
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px; /* Añadido para un pequeño espacio superior */
+}
+
+.invoice-container {
+    word-wrap: break-word; /* Permite el ajuste de palabras largas */
+    white-space: pre-wrap; /* Mantiene los saltos de línea y ajusta palabras largas */
+    max-width: 100%; /* Limita el ancho máximo al contenedor */
+    overflow-x: auto; /* Agrega desplazamiento horizontal si es necesario */
+}
+
+h1 {
+    color: #FF6600;
+}
+
+button {
+    background-color: #FF6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #e65c00;
+}
+
+input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#success-message img {
+    margin: 20px 0;
+}
