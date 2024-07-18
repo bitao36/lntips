@@ -14,8 +14,7 @@
             <input type="number" id="amount" name="amount" required>
             <button type="submit">Generate Invoice</button>
         </form>
-        <div id="invoice" class="invoice-container" style="display: none;">
-            <h2>Invoice</h2>
+        <div id="invoice" class="invoice-container" style="display: none;">            
             <p id="payment-request"></p>
         </div>
         <div id="success-message" style="display: none;">
@@ -38,10 +37,23 @@
             if (response.ok) {
                 document.getElementById('invoice').style.display = 'block';
                 document.getElementById('payment-request').textContent = data.payment_request;
+                checkPayment(data.r_hash);
             } else {
                 alert('Error: ' + data.error);
             }
         });
+
+        async function checkPayment(r_hash) {
+            const interval = setInterval(async () => {
+                const response = await fetch(`/check_payment/${r_hash}`);
+                const data = await response.json();                
+                if (data.settled) {
+                    clearInterval(interval);
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('invoice').style.display = 'none';
+                }
+            }, 5000); // Check every 5 seconds
+        }
 
         
     </script>
